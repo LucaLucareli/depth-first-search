@@ -60,20 +60,17 @@ class TreeNode {
   /**
    * Depth First Search traversal starting from this node
    */
-  public dfs(visited = new Set<number>()): void {
-    if (visited.has(this.idx)) return;
+public dfs(visited: Set<number> = new Set()): void {
+  visited.add(this.idx);
+  console.log(`Visitando: ${this.value}`);
 
-    visited.add(this.idx);
-
-    console.log(this.value);
-
-    for (const childIdx of this.children) {
-      const child = nodes[childIdx];
-      if (child) {
-        child.dfs(visited);
-      }
+  for (const childIdx of this.children) {
+    const child = nodes[childIdx];
+    if (child && !visited.has(childIdx)) {
+      child.dfs(visited);
     }
   }
+}
 }
 
 // -------- Creating graph --------

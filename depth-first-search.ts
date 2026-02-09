@@ -60,16 +60,33 @@ class TreeNode {
   /**
    * Depth First Search traversal starting from this node
    */
-  public dfs(visited: Set<number> = new Set()): void {
+    public dfs(
+    visited: Set<number> = new Set(),
+    depth = 0
+  ): void {
     visited.add(this.idx);
-    console.log(`Visitando: ${this.value}`);
+
+    const indent = '  '.repeat(depth);
+    console.log(`${indent}➡️ Visiting node [${this.idx}] = ${this.value}`);
 
     for (const childIdx of this.children) {
       const child = nodes[childIdx];
-      if (child && !visited.has(childIdx)) {
-        child.dfs(visited);
+
+      if (!child) {
+        console.log(`${indent}⚠️ Child ${childIdx} not found`);
+        continue;
       }
+
+      if (visited.has(childIdx)) {
+        console.log(`${indent}🔁 Child ${childIdx} already visited`);
+        continue;
+      }
+
+      console.log(`${indent}⬇️ Traversing to child ${childIdx}`);
+      child.dfs(visited, depth + 1);
     }
+
+    console.log(`${indent}⬅️ Returning from node ${this.idx}`);
   }
 }
 

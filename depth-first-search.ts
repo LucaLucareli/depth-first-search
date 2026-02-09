@@ -76,34 +76,30 @@ class TreeNode {
 // -------- Creating graph --------
 
 // Root level
-const root = new TreeNode("negócio");
+const root = new TreeNode("Person");
 
-// Units
-const u1 = new TreeNode("unidade 1");
-const u2 = new TreeNode("unidade 2");
-
-// Department
-const dp1 = new TreeNode("depart 1");
-
-// Employees
-const fn1 = new TreeNode("func 1");
-const fn2 = new TreeNode("func 2");
-const fn3 = new TreeNode("func 3");
+// person
+const p1 = new TreeNode("Person 1");
+const p2 = new TreeNode("Person 2");
+const p3 = new TreeNode("Person 3");
+const p4 = new TreeNode("Person 4");
+const p5 = new TreeNode("Person 5");
+const p6 = new TreeNode("Person 6");
 
 // -------- Building relationships --------
 
-// Root -> Units
-root.addChild(u1);
-root.addChild(u2);
+// Root -> p1,p2
+root.addChild(p1);
+root.addChild(p2);
 
-// Units -> Department (shared child = DAG structure)
-u1.addChild(dp1);
-u2.addChild(dp1);
+// p1 -> p3, p2 -> p3
+p1.addChild(p3);
+p2.addChild(p3);
 
-// Department -> Employees
-dp1.addChild(fn1);
-dp1.addChild(fn2);
-dp1.addChild(fn3);
+// p3 -> p4,p5,p6
+p3.addChild(p4);
+p3.addChild(p5);
+p3.addChild(p6);
 
 // -------- Running DFS --------
 root.dfs();
